@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { getList } from "../../api/todoApi";
 import useCustomMove from "../hooks/useCustomMove";
 import PageComponent from "../common/PageComponent";
@@ -17,7 +18,7 @@ const initState = {
 }
 
 const ListComponent = () => {
-
+  const {id} = useParams();
   const {page, size, refresh, moveToList, moveToRead} = useCustomMove()//refresh
 
   //serverData는 나중에 사용
@@ -26,7 +27,7 @@ const ListComponent = () => {
 
   useEffect(() => {
 
-    getList({page,size}).then(data => {
+    getList({id}).then(data => {
       console.log(data)
       setServerData(data)
     })

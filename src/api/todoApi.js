@@ -3,7 +3,7 @@ import axios from "axios"
 //서버 주소
 export const API_SERVER_HOST = 'http://localhost:8080'
 
-const prefix = `${API_SERVER_HOST}/api/todo`
+const prefix = `${API_SERVER_HOST}`
 
 export const getOne = async (tno) => {
   const res = await axios.get(`${prefix}/${tno}` )
@@ -12,9 +12,8 @@ export const getOne = async (tno) => {
 }
 
 export const getList = async ( pageParam ) => {
-  const {page,size} = pageParam
-  const res = await axios.get(`${prefix}/list`, {params: {page:page,size:size }})
-  
+  console.log(pageParam.id)
+  const res = await axios.get(`${prefix}/${pageParam.id}/content`)
   return res.data
 }
 

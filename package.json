@@ -36,6 +36,7 @@
     "glob": "^10.3.10",
     "glob-parent": "^6.0.2",
     "hasown": "^2.0.0",
+    "http-proxy-middleware": "^2.0.6",
     "is-binary-path": "^2.1.0",
     "is-core-module": "^2.13.1",
     "is-extglob": "^2.1.1",
@@ -118,5 +119,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "proxy": "http://localhost:8080"
 }

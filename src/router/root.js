@@ -7,22 +7,7 @@ const TodoIndex = lazy(() => import("../pages/todo/IndexPage"))
 
 const root = createBrowserRouter([
     {
-        path: "1",
-        element: <Suspense fallback={Loading}><TodoIndex /></Suspense>,
-        children: todoRouter()
-    },
-    {
-        path: "2",
-        element: <Suspense fallback={Loading}><TodoIndex /></Suspense>,
-        children: todoRouter()
-    },
-    {
-        path: "3",
-        element: <Suspense fallback={Loading}><TodoIndex /></Suspense>,
-        children: todoRouter()
-    },
-    {
-        path: "4",
+        path: ":id",
         element: <Suspense fallback={Loading}><TodoIndex /></Suspense>,
         children: todoRouter()
     }

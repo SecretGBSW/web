@@ -7,7 +7,7 @@ const IndexPage = () => {
   const navigate = useNavigate()
 
   const handleClickList = useCallback(() => {
-    navigate({ pathname:'contents' })
+    navigate({ pathname:'content' })
   }, [navigate])
 
   const handleClickAdd = useCallback(() => {
