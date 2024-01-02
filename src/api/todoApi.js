@@ -28,14 +28,14 @@ export const postAdd = async ( pageParam,todo ) => {
   return res.data
 } 
 
-export const deleteOne = async (tno) => {
-  const res = await axios.delete(`${prefix}/${tno}`)
+export const deleteOne = async (tno, pageParam) => {
+  const res = await axios.delete(`${prefix}/categories/${pageParam}/contents/${tno}`)
 
   return res.data
 }
 
-export const putOne = async (todo) => {
-  const res = await axios.put(`${prefix}/${todo.tno}`, todo)
+export const putOne = async (todo, pageParam) => {
+  const res = await axios.put(`${prefix}/categories${pageParam.id}/contents/`, todo)
 
   return res.data
 }

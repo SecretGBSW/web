@@ -5,11 +5,8 @@ import useCustomMove from "../hooks/useCustomMove";
 import PageComponent from "../common/PageComponent";
 
 const initState = {
-  dtoList:[
-    {contentId: "1",title: "tlqkf", writer: "tlqkf"},
-    {contentId: "2",title: "tlqkf2", writer: "tlqkf2"},
-  ],
-  pageNumList:[1],
+  dtoList:[],
+  pageNumList:[],
   pageRequestDTO: null,
   prev: false,
   next: false,
@@ -31,38 +28,42 @@ const ListComponent = () => {
   useEffect(() => {
 
     getList({id}).then(data => {
-      console.log(data)
-      setServerData(data)
+      // console.log(data.data)·/
+      setServerData({
+        ...initState,
+        dtoList: data.data,
+      });
     })
 
-  }, [page,size, refresh])
+  }, [id, page,size, refresh])
 
   return ( 
     <div className="border-2 border-blue-100 mt-10 mr-2 ml-2">
   
       <div className="flex flex-wrap mx-auto justify-center p-6">
-  
-        {serverData.dtoList.map(todo =>
-  
-        <div
-        key= {todo.contentId} 
-        className="w-full min-w-[400px]  p-2 m-2 rounded shadow-md"
-        onClick={() => moveToRead(todo.contentId)} 
-        >  
-  
-          <div className="flex">
-            <div className="font-extrabold text-2xl p-2 w-1/12">
-              {todo.contentId}
-            </div>
-            <div className="text-1xl m-1 p-2 w-8/12 font-extrabold">
-              {todo.title}
-            </div>
-            <div className="text-1xl m-1 p-2 w-2/10 font-medium">
-              {todo.writer}
+        {serverData.dtoList.map((todo,idx) => {
+          console.log(todo)
+          return(
+          <div
+          key= {todo.id} 
+          className="w-full min-w-[400px]  p-2 m-2 rounded shadow-md"
+          onClick={() => moveToRead(todo.id)} 
+          >
+            <div className="flex">
+              <div className="font-extrabold text-2xl p-2 w-1/12">
+                {idx + 1}
+              </div>
+              <div className="text-1xl m-1 p-2 w-8/12 font-extrabold">
+                {todo.title}
+              </div>
+              <div className="text-1xl m-1 p-2 w-2/10 font-medium">
+                {todo.writer}
+              </div>
             </div>
           </div>
-        </div>
-        )}
+          )
+        })
+        }
       </div>
 
       <PageComponent serverData={serverData} movePage={moveToList}></PageComponent>

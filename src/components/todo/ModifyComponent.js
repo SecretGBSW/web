@@ -1,19 +1,19 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useParams } from "react";
 import { deleteOne, getOne, putOne } from "../../api/todoApi";
 
 import ResultModal from "../common/ResultModal";
 import useCustomMove from "../hooks/useCustomMove";
 
 const initState = {
-  tno:0,
+  tno: 1,
   title:'',
   writer: '',
   content: '',
   password: '',
-  complete: false
 }
 
 const ModifyComponent = ({tno, moveList, moveRead}) => {
+
 
   const [todo, setTodo] = useState({...initState})
 
@@ -68,36 +68,24 @@ const ModifyComponent = ({tno, moveList, moveRead}) => {
     setTodo({...todo})
   }
 
-  const handleChangeTodoComplete = (e) => {
 
-    const value = e.target.value
-
-    todo.complete = (value === 'Y')
-
-    setTodo({...todo})
-  }
 
   return ( 
     <div className = "border-2 border-sky-200 mt-10 m-2 p-4"> 
 
 {result ? <ResultModal title={'처리결과'} content={result} callbackFn={closeModal}></ResultModal>  :<></>}
 
-      <div className="flex justify-center mt-10">
-        <div className="relative mb-4 flex w-full flex-wrap items-stretch">
-          <div className="w-1/5 p-6 text-right font-bold">TNO</div>
-          <div className="w-4/5 p-6 rounded-r border border-solid shadow-md bg-gray-100">
-            {todo.tno}        
-          </div>  
-        </div>
-      </div>
-      <div className="flex justify-center">
+<div className="flex justify-center">
         <div className="relative mb-4 flex w-full flex-wrap items-stretch">
           <div className="w-1/5 p-6 text-right font-bold">WRITER</div>
-          <div className="w-4/5 p-6 rounded-r border border-solid shadow-md bg-gray-100">
-            {todo.writer}        
-          </div>
-
-        </div>
+          <input className="w-4/5 p-6 rounded-r border border-solid border-neutral-300 shadow-md" 
+           name="writer"
+           type={'text'} 
+           value={todo.writer}
+           onChange={handleChangeTodo}
+           >
+           </input>
+        </div>  
       </div>
       <div className="flex justify-center">
         <div className="relative mb-4 flex w-full flex-wrap items-stretch">
@@ -134,20 +122,7 @@ const ModifyComponent = ({tno, moveList, moveRead}) => {
            >
            </input>
         </div>  
-      </div>
-      <div className="flex justify-center">
-        <div className="relative mb-4 flex w-full flex-wrap items-stretch">
-          <div className="w-1/5 p-6 text-right font-bold">COMPLETE</div>
-          <select
-            name="status" 
-            className="border-solid border-2 rounded m-1 p-2"
-            onChange={handleChangeTodoComplete} 
-            value = {todo.complete? 'Y':'N'} >
-            <option value='Y'>Completed</option>
-            <option value='N'>Not Yet</option>
-          </select>
-        </div>
-      </div>
+      </div>  
 
       <div className="flex justify-end p-4">
         <button type="button" 
