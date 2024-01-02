@@ -1,0 +1,164 @@
+{
+  "board": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "content": "Hel안녕하세요lo",
+      "writer": "효림",
+      "regDate": "2023/12/29",
+      "pwd": "1234"
+    },
+    {
+      "id": 2,
+      "title": "json-server",
+      "content": "Hel안녕하세요",
+      "writer": "효림",
+      "regDate": "2023/12/29",
+      "pwd": "1234"
+    },
+    {
+      "id": 3,
+      "title": "json-server",
+      "content": "Hel안녕하세",
+      "writer": "효림",
+      "regDate": "2023/12/29",
+      "pwd": "1234"
+    },
+    {
+      "id": 4,
+      "title": "json-server",
+      "content": "Hel안녕하",
+      "writer": "효림",
+      "regDate": "2023/12/29",
+      "pwd": "1234"
+    },
+    {
+      "id": 5,
+      "title": "json-server",
+      "content": "Hel안녕",
+      "writer": "효림",
+      "regDate": "2023/12/29",
+      "pwd": "1234"
+    },
+    {
+      "id": 6,
+      "title": "json-server",
+      "content": "Hel안",
+      "writer": "효림",
+      "regDate": "2023/12/29",
+      "pwd": "1234"
+    },
+    {
+      "id": 7,
+      "title": "json-server",
+      "content": "Hel",
+      "writer": "효림",
+      "regDate": "2023/12/29",
+      "pwd": "1234"
+    },
+    {
+      "id": 8,
+      "title": "json-server",
+      "content": "Hello",
+      "writer": "효림",
+      "regDate": "2023/12/29",
+      "pwd": "1234"
+    },
+    {
+      "id": 9,
+      "title": "json-server",
+      "content": "Hi",
+      "writer": "효림",
+      "regDate": "2023/12/29",
+      "pwd": "1234"
+    },
+    {
+      "id": 10,
+      "title": "json-server",
+      "content": "봉쥬르",
+      "writer": "효림",
+      "regDate": "2023/12/29",
+      "pwd": "1234"
+    },
+    {
+      "id": 11,
+      "title": "json-server",
+      "content": "굿텐탁",
+      "writer": "효림",
+      "regDate": "2023/12/29",
+      "pwd": "1234"
+    }
+  ],
+  "comment": [
+    {
+      "id": 1,
+      "content": "댓글",
+      "writer": "우효림",
+      "pwd": "1234",
+      "regDate": "2023/12/29",
+      "boardId": 1
+    },
+    {
+      "id": 2,
+      "content": "댓글1",
+      "writer": "우효림",
+      "pwd": "1234",
+      "regDate": "2023/12/29",
+      "boardId": 1
+    },
+    {
+      "id": 3,
+      "content": "댓글2",
+      "writer": "우효림",
+      "pwd": "1234",
+      "regDate": "2023/12/29",
+      "boardId": 1
+    },
+    {
+      "id": 4,
+      "content": "댓글0",
+      "writer": "우효림",
+      "pwd": "1234",
+      "regDate": "2023/12/29",
+      "boardId": 2
+    },
+    {
+      "id": 5,
+      "content": "댓글0",
+      "writer": "우효림",
+      "pwd": "1234",
+      "regDate": "2023/12/29",
+      "boardId": 2
+    },
+    {
+      "id": 6,
+      "content": "댓글0",
+      "writer": "우효림",
+      "pwd": "1234",
+      "regDate": "2023/12/29",
+      "boardId": 3
+    },
+    {
+      "id": 7,
+      "content": "댓글0",
+      "writer": "우효림",
+      "pwd": "1234",
+      "regDate": "2023/12/29",
+      "boardId": 4
+    }
+  ],
+  "category": [
+    {
+      "id": 1,
+      "name": "수업교사"
+    },
+    {
+      "id": 2,
+      "name": "학생"
+    },
+    {
+      "id": 3,
+      "name": "기타"
+    }
+  ]
+}
