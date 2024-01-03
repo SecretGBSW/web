@@ -1,4 +1,5 @@
   import { useEffect, useState } from "react"
+  import { useParams } from "react-router-dom"
   import  {getOne} from "../../api/todoApi"
   import useCustomMove from "../hooks/useCustomMove"
 
@@ -7,20 +8,19 @@
     title:'',
     writer: '',
     content: '',
-    password: '',
-    complete: false
+    password: ''
   }
 
-  const ReadComponent = ({tno}) => {
-
+  const ReadComponent = () => {
+    const {id,tno} = useParams();
     const [todo, setTodo] = useState(initState) //아직 todo는 사용하지 않음 
     
     const {moveToList, moveToModify} = useCustomMove()  
 
     useEffect(() => {
-      getOne(tno).then(data => {
+      getOne(id,tno).then(data => {
         console.log(data)
-        setTodo(data)
+        setTodo(data.data)
       })    
     }, [tno])
 
@@ -31,7 +31,6 @@
       {makeDiv('Title', todo.title)}
       {makeDiv('Content', todo.content)}
       {makeDiv('Password', todo.password)}
-      {makeDiv('Complete', todo.complete ? 'Completed' : 'Not Yet')}
 
       {/* buttons.........start */}
       <div className="flex justify-end p-4">

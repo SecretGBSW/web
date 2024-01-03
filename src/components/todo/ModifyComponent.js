@@ -1,22 +1,21 @@
-import { useEffect, useState, useParams } from "react";
+import { useEffect, useState } from "react";
+import {useParams} from "react-router-dom"
 import { deleteOne, getOne, putOne } from "../../api/todoApi";
 
 import ResultModal from "../common/ResultModal";
 import useCustomMove from "../hooks/useCustomMove";
 
 const initState = {
-  tno: 1,
   title:'',
   writer: '',
   content: '',
-  password: '',
+  pw: '',
 }
 
-const ModifyComponent = ({tno, moveList, moveRead}) => {
+const ModifyComponent = ({ moveList, moveRead}) => {
 
-
+  const{id,tno} = useParams();
   const [todo, setTodo] = useState({...initState})
-
 
   //모달 창을 위한 상태 
   const [result, setResult] = useState(null)
@@ -29,20 +28,23 @@ const ModifyComponent = ({tno, moveList, moveRead}) => {
 
     //console.log(todo)
 
-    putOne(todo).then(data => {
+    putOne(todo,id,tno).then(data => {
       console.log("modify result: " + data)
       setResult('Modified')
     })
   }
 
-  const handleClickDelete = () => { //버튼 클릭시 
+  const handleClickDelete = () => {
+  const passwordData = {
+    pw: todo.pw
+  };
 
-    deleteOne(tno).then( data => {
-      console.log("delete result: " + data)
-      setResult('Deleted')
-    })
+  deleteOne(passwordData, tno, id).then(data => {
+    console.log("delete result: " + data)
+    setResult('Deleted')
+  });
+}
 
-  }
 
   //모달 창이 close될때 
   const closeModal = () => {
@@ -54,11 +56,8 @@ const ModifyComponent = ({tno, moveList, moveRead}) => {
   }
 
 
-
   useEffect(() => {
-
-    getOne(tno).then(data =>  setTodo(data))
-
+    getOne(id,tno).then(data =>  setTodo(data.data))
   },[tno])
 
   const handleChangeTodo = (e) => {
@@ -115,9 +114,9 @@ const ModifyComponent = ({tno, moveList, moveRead}) => {
         <div className="relative mb-4 flex w-full flex-wrap items-stretch">
           <div className="w-1/5 p-6 text-right font-bold">PASSWORD</div>
           <input className="w-4/5 p-6 rounded-r border border-solid border-neutral-300 shadow-md" 
-           name="password"
+           name="pw"
            type={'text'} 
-           value={todo.password}
+           value={todo.pw}
            onChange={handleChangeTodo}
            >
            </input>
