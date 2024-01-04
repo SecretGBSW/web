@@ -21,6 +21,9 @@ const ReadComponent = () => {
     content: '',
     pw: ''
   });
+  const [showPasswordInput, setShowPasswordInput] = useState(false);
+  const [passwordInput, setPasswordInput] = useState('');
+  const [commentId, setCommentId] = useState('');
 
   const { moveToList, moveToModify } = useCustomMove();
 
@@ -30,8 +33,8 @@ const ReadComponent = () => {
     });
 
     getComments(id, tno).then(commentData => {
-      console.log('Comments Data:', commentData); // 콘솔 출력
-      setComments(commentData);
+      console.log('Comments Data:', commentData.data);
+      setComments(commentData.data);
     });
   }, [id, tno]);
 
@@ -53,9 +56,19 @@ const ReadComponent = () => {
 
   const removeComment = async (commentId) => {
     console.log('Removing Comment with ID:', commentId); // 콘솔 출력
+    setShowPasswordInput(true);
+    setCommentId(commentId);
+  };
+
+  const handlePasswordSubmit = async (commentId) => {
     try {
-      await deleteComment(id, tno, commentId, { pw: newComment.pw });
+      // 여기서도 서버로 비밀번호 전송 등의 작업을 할 수 있습니다.
+      console.log('Password submitted:', passwordInput);
+
+      await deleteComment(id, tno, commentId, { pw: passwordInput });
       setComments(prevComments => prevComments.filter(comment => comment.id !== commentId));
+      setPasswordInput('');
+      setShowPasswordInput(false);
     } catch (error) {
       console.error('Error deleting comment:', error);
     }
@@ -80,16 +93,37 @@ const ReadComponent = () => {
       <div className="mt-4">
         <h2 className="text-lg font-semibold">댓글 목록</h2>
         <ul>
-        {comments.map(comment => (
-          <li key={comment.id}>
-            {JSON.stringify(comment)}{' '}
-            <button onClick={() => removeComment(comment.id)}>삭제</button>
-          </li>
-        ))}
-      </ul>
+          {comments.map(comment => (
+            <li key={comment.id}>
+              <button onClick={() => removeComment(comment.id)}>삭제</button>
+              <div className="flex">
+                <div className="font-extrabold text-2xl p-2 w-4/12">
+                  {comment.title}
+                </div>
+                <div className="text-1xl m-1 p-2 w-5/12 font-extrabold">
+                  {comment.contents}
+                </div>
+                <div className="text-1xl m-1 p-2 w-3/10 font-medium">
+                  {comment.writer}
+                </div>
+              </div>
+            </li>
+          ))}
+        </ul>
       </div>
 
       <div className="mt-4">
+        {showPasswordInput && (
+          <div>
+            <input
+              type="password"
+              placeholder="댓글 비밀번호"
+              value={passwordInput}
+              onChange={(e) => setPasswordInput(e.target.value)}
+            />
+            <button onClick={() => handlePasswordSubmit(commentId)}>확인</button>
+          </div>
+        )}
         <div>
           <input
             type="text"
@@ -111,7 +145,7 @@ const ReadComponent = () => {
             placeholder="댓글 내용"
             value={newComment.content}
             onChange={(e) => setNewComment(prev => ({ ...prev, content: e.target.value }))}
-          />    
+          />
         </div>
         <div>
           <input

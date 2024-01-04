@@ -51,13 +51,27 @@ export const getComments = async (id, tno) => {
 };
 
 export const createComment = async (id, tno, commentData) => {
-  const res = await axios.post(`${prefix}/categories/${id}/contents/${tno}/comments`, {
-    title: commentData.title,
-    writer: commentData.writer,
-    content: commentData.content,
-    pw: commentData.pw,
-  });
-  return res.data;
+  try {
+    // Send a request to create a comment
+    const res = await axios.post(`${prefix}/categories/${id}/contents/${tno}/comments`, {
+      title: commentData.title,
+      writer: commentData.writer,
+      content: commentData.content,
+      pw: commentData.pw,
+    });
+
+    // If the comment creation is successful, reload the page
+    if (res.status === 200) {
+      console.log('Comment created successfully');
+      window.location.reload();
+    }
+
+    // Return the response data
+    return res.data;
+  } catch (error) {
+    console.error('createComment error:', error);
+    throw error;
+  }
 };
 
 export const updateComment = async (id, tno, commentId, updatedCommentData) => {
@@ -67,7 +81,8 @@ export const updateComment = async (id, tno, commentId, updatedCommentData) => {
 
 export const deleteComment = async (id, tno, commentId, pwData) => {
   try {
-    const res = await axios.post(`${prefix}/categories/${id}/contents/${tno}/comments/${commentId}`, pwData);
+    console.log('Password Data:', pwData);
+    const res = await axios.delete(`${prefix}/categories/${id}/contents/${tno}/comments/${commentId}`, { data: pwData });
     return res.data;
   } catch (error) {
     console.error("deleteComment error:", error);
